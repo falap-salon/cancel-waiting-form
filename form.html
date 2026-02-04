@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FALAP キャンセル待ち登録</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            max-width: 500px;
+            width: 100%;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        .back-button {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .header h1 {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .header p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 30px 20px;
+        }
+
+        .notice {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin-bottom: 25px;
+            border-radius: 5px;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .notice-title {
+            font-weight: 600;
+            color: #856404;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .notice ul {
+            margin-left: 20px;
+            color: #856404;
+        }
+
+        .notice li {
+            margin-bottom: 5px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #333;
+            font-size: 14px;
+        }
+
+        .required {
+            color: #dc3545;
+            font-size: 12px;
+            margin-left: 4px;
+        }
+
+        .optional {
+            color: #6c757d;
+            font-size: 12px;
+            margin-left: 4px;
+            font-weight: 400;
+        }
+
+        input[type="text"],
+        input[type="tel"],
+        input[type="date"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .checkbox-item:hover {
+            border-color: #667eea;
+            background: #f8f9ff;
+        }
+
+        .checkbox-item input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+
+        .checkbox-item label {
+            margin: 0;
+            cursor: pointer;
+            font-weight: 400;
+        }
+
+        .radio-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .radio-item {
+            display: flex;
+            align-items: center;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .radio-item:hover {
+            border-color: #667eea;
+            background: #f8f9ff;
+        }
+
+        .radio-item input[type="radio"] {
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+
+        .radio-item label {
+            margin: 0;
+            cursor: pointer;
+            font-weight: 400;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        .submit-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .loading.active {
+            display: block;
+        }
+
+        .spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #667eea;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 15px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .success-message {
+            display: none;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .success-message.active {
+            display: block;
+        }
+
+        .success-icon {
+            font-size: 60px;
+            margin-bottom: 20px;
+        }
+
+        .success-message h2 {
+            color: #28a745;
+            margin-bottom: 15px;
+        }
+
+        .success-message p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+
+        .error-message {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+            border-left: 4px solid #dc3545;
+        }
+
+        .error-message.active {
+            display: block;
+        }
+
+        .help-text {
+            font-size: 12px;
+            color: #6c757d;
+            margin-top: 5px;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+
+            .header h1 {
+                font-size: 20px;
+            }
+
+            .content {
+                padding: 20px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <button class="back-button" onclick="goBack()">← 戻る</button>
+            <h1>キャンセル待ち登録</h1>
+            <p>ご希望日時に空きが出たらお電話でご連絡します</p>
+        </div>
+
+        <div class="content">
+            <!-- エラーメッセージ -->
+            <div class="error-message" id="errorMessage"></div>
+
+            <!-- ローディング -->
+            <div class="loading" id="loading">
+                <div class="spinner"></div>
+                <p>送信中...</p>
+            </div>
+
+            <!-- 成功メッセージ -->
+            <div class="success-message" id="successMessage">
+                <div class="success-icon">✅</div>
+                <h2>登録完了しました！</h2>
+                <p>ご希望日時に空きが出ましたら、<br>お電話でご連絡させていただきます。</p>
+                <p style="margin-top: 20px; font-size: 14px;">
+                    <strong>📞 FALAPの電話番号を登録してください</strong><br>
+                    <span style="color: #667eea; font-size: 18px; font-weight: 600;">092-776-1006</span>
+                </p>
+            </div>
+
+            <!-- フォーム -->
+            <form id="cancelWaitingForm" action="https://script.google.com/macros/s/AKfycbzjv-k64PvRlr8VL-QLZ0Aqoo11uQQyw7UM0cF_pi7ReR1MC8wKH95XYEbqZaP8aSjz/exec" method="post">
+                <div class="notice" style="background-color: #fff3cd; border-color: #ffc107; margin-bottom: 20px;">
+                    <div class="notice-title" style="color: #856404;">📅 定休日のご案内</div>
+                    <ul style="color: #856404;">
+                        <li><strong>毎週月曜日・第3火曜日</strong>は定休日です</li>
+                        <li>定休日に登録された場合、翌営業日以降にご連絡いたします</li>
+                        <li>臨時休業等の最新情報は<a href="https://falap.jp" target="_blank" style="color: #856404; text-decoration: underline;">ホームページ</a>でご確認ください</li>
+                    </ul>
+                </div>
+
+                <div class="notice">
+                    <div class="notice-title">⚠️ ご利用前にご確認ください</div>
+                    <ul>
+                        <li>お電話でのご連絡となります</li>
+                        <li>登録順にご連絡します</li>
+                        <li>お電話がつながらない場合、次の方にご案内します</li>
+                        <li>ご希望日に必ず空きが出るとは限りません</li>
+                    </ul>
+                </div>
+
+                <div class="form-group">
+                    <label for="name">お名前 <span class="required">必須</span></label>
+                    <input type="text" id="name" name="name" placeholder="山田太郎" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">電話番号 <span class="required">必須</span></label>
+                    <input type="tel" id="phone" name="phone" placeholder="092-776-1006" required>
+                    <div class="help-text">空きが出た際にお電話でご連絡します</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="date1">ご希望日（第1希望） <span class="required">必須</span></label>
+                    <input type="date" id="date1" name="date1" required>
+                </div>
+
+                <div class="form-group" id="time1-group" style="display: none;">
+                    <label>第1希望の時間帯 <span class="required">必須</span></label>
+                    <div class="radio-group">
+                        <div class="radio-item">
+                            <input type="radio" id="time1-morning" name="time1" value="午前（9:00-12:00）">
+                            <label for="time1-morning">午前（9:00-12:00）</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="time1-afternoon" name="time1" value="午後（12:00-16:00）">
+                            <label for="time1-afternoon">午後（12:00-16:00）</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="time1-evening" name="time1" value="夕方（16:00-19:00）">
+                            <label for="time1-evening">夕方（16:00-19:00）</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="time1-any" name="time1" value="時間問わず">
+                            <label for="time1-any">時間問わず</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="date2">ご希望日（第2希望） <span class="optional">任意</span></label>
+                    <input type="date" id="date2" name="date2">
+                </div>
+
+                <div class="form-group" id="time2-group" style="display: none;">
+                    <label>第2希望の時間帯 <span class="optional">任意</span></label>
+                    <div class="radio-group">
+                        <div class="radio-item">
+                            <input type="radio" id="time2-morning" name="time2" value="午前（9:00-12:00）">
+                            <label for="time2-morning">午前（9:00-12:00）</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="time2-afternoon" name="time2" value="午後（12:00-16:00）">
+                            <label for="time2-afternoon">午後（12:00-16:00）</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="time2-evening" name="time2" value="夕方（16:00-19:00）">
+                            <label for="time2-evening">夕方（16:00-19:00）</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="time2-any" name="time2" value="時間問わず">
+                            <label for="time2-any">時間問わず</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="date3">ご希望日（第3希望） <span class="optional">任意</span></label>
+                    <input type="date" id="date3" name="date3">
+                </div>
+
+                <div class="form-group" id="time3-group" style="display: none;">
+                    <label>第3希望の時間帯 <span class="optional">任意</span></label>
+                    <div class="radio-group">
+                        <div class="radio-item">
+                            <input type="radio" id="time3-morning" name="time3" value="午前（9:00-12:00）">
+                            <label for="time3-morning">午前（9:00-12:00）</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="time3-afternoon" name="time3" value="午後（12:00-16:00）">
+                            <label for="time3-afternoon">午後（12:00-16:00）</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="time3-evening" name="time3" value="夕方（16:00-19:00）">
+                            <label for="time3-evening">夕方（16:00-19:00）</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="time3-any" name="time3" value="時間問わず">
+                            <label for="time3-any">時間問わず</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>ご希望のメニュー <span class="required">必須</span></label>
+                    <div class="radio-group">
+                        <div class="radio-item">
+                            <input type="radio" id="menu1" name="menu" value="カット" required>
+                            <label for="menu1">カット</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="menu2" name="menu" value="カット + カラー">
+                            <label for="menu2">カット + カラー</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="menu3" name="menu" value="カット + パーマ">
+                            <label for="menu3">カット + パーマ</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="menu4" name="menu" value="その他">
+                            <label for="menu4">その他</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group" id="menu-other-detail" style="display: none;">
+                    <label for="menu-other-text">ご希望のメニュー詳細 <span class="required">必須</span></label>
+                    <input type="text" id="menu-other-text" name="menuOtherDetail" placeholder="例：ヘッドスパ、トリートメント、カラーのみ など">
+                    <div class="help-text">「その他」を選択された場合は、具体的なメニューをご記入ください</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="stylist">担当者のご希望 <span class="optional">任意</span></label>
+                    <select id="stylist" name="stylist">
+                        <option value="">指定なし</option>
+                        <option value="西川義晴（マスター）歴40年以上">西川義晴（マスター）歴40年以上</option>
+                        <option value="西川拓朗（店長）歴20年以上">西川拓朗（店長）歴20年以上</option>
+                        <option value="西川千晴（ケアリスト）スパメイン">西川千晴（ケアリスト）スパメイン</option>
+                    </select>
+                    <div class="help-text">担当者のご希望がある場合はお選びください</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="notes">その他ご要望 <span class="optional">任意</span></label>
+                    <textarea id="notes" name="notes" placeholder="何かご要望があればお聞かせください"></textarea>
+                </div>
+
+                <button type="submit" class="submit-btn">登録する</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // 日付入力時に時間帯欄を表示/非表示
+        const date1Input = document.getElementById('date1');
+        const date2Input = document.getElementById('date2');
+        const date3Input = document.getElementById('date3');
+        const time1Group = document.getElementById('time1-group');
+        const time2Group = document.getElementById('time2-group');
+        const time3Group = document.getElementById('time3-group');
+
+        // 第1希望の日付変更時
+        date1Input.addEventListener('change', function() {
+            if (this.value) {
+                time1Group.style.display = 'block';
+                // 第1希望は必須なので、時間帯も必須にする
+                document.querySelectorAll('input[name="time1"]').forEach(radio => {
+                    radio.setAttribute('required', 'required');
+                });
+            } else {
+                time1Group.style.display = 'none';
+                document.querySelectorAll('input[name="time1"]').forEach(radio => {
+                    radio.removeAttribute('required');
+                    radio.checked = false;
+                });
+            }
+        });
+
+        // 第2希望の日付変更時
+        date2Input.addEventListener('change', function() {
+            if (this.value) {
+                time2Group.style.display = 'block';
+            } else {
+                time2Group.style.display = 'none';
+                document.querySelectorAll('input[name="time2"]').forEach(radio => {
+                    radio.checked = false;
+                });
+            }
+        });
+
+        // 第3希望の日付変更時
+        date3Input.addEventListener('change', function() {
+            if (this.value) {
+                time3Group.style.display = 'block';
+            } else {
+                time3Group.style.display = 'none';
+                document.querySelectorAll('input[name="time3"]').forEach(radio => {
+                    radio.checked = false;
+                });
+            }
+        });
+
+        // メニュー選択時の処理（「その他」選択時に詳細欄を表示）
+        const menuRadios = document.querySelectorAll('input[name="menu"]');
+        const menuOtherDetail = document.getElementById('menu-other-detail');
+        const menuOtherText = document.getElementById('menu-other-text');
+        
+        menuRadios.forEach(radio => {
+            radio.addEventListener('change', function() {
+                if (this.value === 'その他') {
+                    menuOtherDetail.style.display = 'block';
+                    menuOtherText.setAttribute('required', 'required');
+                } else {
+                    menuOtherDetail.style.display = 'none';
+                    menuOtherText.removeAttribute('required');
+                    menuOtherText.value = ''; // クリア
+                }
+            });
+        });
+
+        // フォームの送信処理
+        document.getElementById('cancelWaitingForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // 第1希望の時間帯チェック
+            const time1Checked = document.querySelector('input[name="time1"]:checked');
+            if (!time1Checked) {
+                showError('第1希望の時間帯を選択してください');
+                return;
+            }
+
+            // 第2希望がある場合は時間帯も必須
+            if (date2Input.value && !document.querySelector('input[name="time2"]:checked')) {
+                showError('第2希望の時間帯を選択してください');
+                return;
+            }
+
+            // 第3希望がある場合は時間帯も必須
+            if (date3Input.value && !document.querySelector('input[name="time3"]:checked')) {
+                showError('第3希望の時間帯を選択してください');
+                return;
+            }
+
+            // メニュー「その他」の詳細チェック
+            const selectedMenu = document.querySelector('input[name="menu"]:checked').value;
+            if (selectedMenu === 'その他' && !menuOtherText.value.trim()) {
+                showError('メニューの詳細をご記入ください');
+                return;
+            }
+
+            // フォームデータの取得
+            const formData = new FormData(this);
+            
+            // 時間帯の取得
+            const time1 = formData.get('time1') || '';
+            const time2 = formData.get('time2') || '';
+            const time3 = formData.get('time3') || '';
+            
+            // メニューの値を調整（「その他」の場合は詳細を含める）
+            let menuValue = formData.get('menu');
+            if (menuValue === 'その他' && menuOtherText.value.trim()) {
+                menuValue = 'その他（' + menuOtherText.value.trim() + '）';
+            }
+            
+            // データオブジェクトの作成
+            const data = {
+                name: formData.get('name'),
+                phone: formData.get('phone'),
+                date1: formData.get('date1'),
+                time1: time1,
+                date2: formData.get('date2') || '',
+                time2: time2,
+                date3: formData.get('date3') || '',
+                time3: time3,
+                menu: menuValue,
+                stylist: formData.get('stylist') || '指定なし',
+                notes: formData.get('notes') || ''
+            };
+
+            // ローディング表示
+            showLoading();
+
+            // URLSearchParams で form-urlencoded として送信（CORS回避）
+            const params = new URLSearchParams();
+            Object.entries(data).forEach(([k, v]) => params.append(k, v));
+
+            fetch(this.action, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+                },
+                body: params.toString()
+            })
+            .then(r => r.text())
+            .then(txt => {
+                console.log('GAS response:', txt);
+                hideLoading();
+                showSuccess();
+            })
+            .catch(err => {
+                hideLoading();
+                showError('送信に失敗しました。もう一度お試しください。');
+                console.error('Error:', err);
+            });
+        });
+
+        function showLoading() {
+            document.getElementById('loading').classList.add('active');
+            document.getElementById('cancelWaitingForm').style.display = 'none';
+            document.getElementById('errorMessage').classList.remove('active');
+        }
+
+        function hideLoading() {
+            document.getElementById('loading').classList.remove('active');
+        }
+
+        function showSuccess() {
+            document.getElementById('successMessage').classList.add('active');
+        }
+
+        function showError(message) {
+            const errorDiv = document.getElementById('errorMessage');
+            errorDiv.textContent = message;
+            errorDiv.classList.add('active');
+            
+            // 3秒後に自動で消す
+            setTimeout(() => {
+                errorDiv.classList.remove('active');
+            }, 5000);
+        }
+
+        // 今日の日付を最小日付として設定
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('date1').setAttribute('min', today);
+        document.getElementById('date2').setAttribute('min', today);
+        document.getElementById('date3').setAttribute('min', today);
+
+        // ランディングページに戻る
+        function goBack() {
+            window.location.href = 'ランディングページ.html';
+        }
+    </script>
+</body>
+</html>

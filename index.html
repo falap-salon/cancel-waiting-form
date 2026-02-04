@@ -33,210 +33,137 @@
         .header {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            padding: 30px 20px;
+            padding: 40px 20px;
             text-align: center;
         }
 
         .header h1 {
-            font-size: 24px;
+            font-size: 28px;
             font-weight: 600;
-            margin-bottom: 8px;
+            margin-bottom: 12px;
         }
 
         .header p {
-            font-size: 14px;
-            opacity: 0.9;
-        }
-
-        .content {
-            padding: 30px 20px;
-        }
-
-        .notice {
-            background: #fff3cd;
-            border-left: 4px solid #ffc107;
-            padding: 15px;
-            margin-bottom: 25px;
-            border-radius: 5px;
-            font-size: 13px;
+            font-size: 15px;
+            opacity: 0.95;
             line-height: 1.6;
         }
 
-        .notice-title {
-            font-weight: 600;
-            color: #856404;
+        .content {
+            padding: 40px 20px;
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 15px;
+            padding: 25px 20px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            animation: fadeInUp 0.6s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-card:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .stat-number {
+            font-size: 48px;
+            font-weight: 700;
+            color: #667eea;
             margin-bottom: 8px;
             display: flex;
-            align-items: center;
+            align-items: baseline;
+            justify-content: center;
             gap: 5px;
         }
 
-        .notice ul {
-            margin-left: 20px;
+        .stat-number .unit {
+            font-size: 20px;
+            font-weight: 500;
+            color: #666;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: #666;
+            font-weight: 500;
+        }
+
+        .info-box {
+            background: #fff9e6;
+            border-left: 4px solid #ffc107;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            font-size: 14px;
+            line-height: 1.8;
             color: #856404;
         }
 
-        .notice li {
-            margin-bottom: 5px;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        label {
+        .info-box strong {
             display: block;
-            font-weight: 600;
             margin-bottom: 8px;
-            color: #333;
-            font-size: 14px;
-        }
-
-        .required {
-            color: #dc3545;
-            font-size: 12px;
-            margin-left: 4px;
-        }
-
-        .optional {
-            color: #6c757d;
-            font-size: 12px;
-            margin-left: 4px;
-            font-weight: 400;
-        }
-
-        input[type="text"],
-        input[type="tel"],
-        input[type="date"],
-        select,
-        textarea {
-            width: 100%;
-            padding: 12px 15px;
-            border: 2px solid #e0e0e0;
-            border-radius: 8px;
             font-size: 15px;
-            transition: all 0.3s ease;
-            font-family: inherit;
         }
 
-        input:focus,
-        select:focus,
-        textarea:focus {
-            outline: none;
-            border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-        }
-
-        textarea {
-            resize: vertical;
-            min-height: 80px;
-        }
-
-        .checkbox-group {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .checkbox-item {
-            display: flex;
-            align-items: center;
-            padding: 12px;
-            border: 2px solid #e0e0e0;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .checkbox-item:hover {
-            border-color: #667eea;
-            background: #f8f9ff;
-        }
-
-        .checkbox-item input[type="checkbox"] {
-            width: 20px;
-            height: 20px;
-            margin-right: 10px;
-            cursor: pointer;
-        }
-
-        .checkbox-item label {
-            margin: 0;
-            cursor: pointer;
-            font-weight: 400;
-        }
-
-        .radio-group {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .radio-item {
-            display: flex;
-            align-items: center;
-            padding: 12px;
-            border: 2px solid #e0e0e0;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .radio-item:hover {
-            border-color: #667eea;
-            background: #f8f9ff;
-        }
-
-        .radio-item input[type="radio"] {
-            width: 20px;
-            height: 20px;
-            margin-right: 10px;
-            cursor: pointer;
-        }
-
-        .radio-item label {
-            margin: 0;
-            cursor: pointer;
-            font-weight: 400;
-        }
-
-        .submit-btn {
+        .cta-button {
             width: 100%;
-            padding: 16px;
+            padding: 20px;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             border: none;
-            border-radius: 10px;
-            font-size: 16px;
+            border-radius: 12px;
+            font-size: 18px;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
-            margin-top: 10px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
         }
 
-        .submit-btn:hover {
+        .cta-button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.5);
         }
 
-        .submit-btn:active {
+        .cta-button:active {
             transform: translateY(0);
         }
 
-        .submit-btn:disabled {
-            background: #ccc;
-            cursor: not-allowed;
-            transform: none;
+        .note {
+            text-align: center;
+            font-size: 13px;
+            color: #999;
+            padding: 0 10px;
         }
 
         .loading {
-            display: none;
             text-align: center;
             padding: 20px;
-        }
-
-        .loading.active {
-            display: block;
+            color: #666;
         }
 
         .spinner {
@@ -254,50 +181,30 @@
             100% { transform: rotate(360deg); }
         }
 
-        .success-message {
-            display: none;
-            text-align: center;
-            padding: 40px 20px;
-        }
-
-        .success-message.active {
-            display: block;
-        }
-
-        .success-icon {
-            font-size: 60px;
-            margin-bottom: 20px;
-        }
-
-        .success-message h2 {
-            color: #28a745;
-            margin-bottom: 15px;
-        }
-
-        .success-message p {
-            color: #666;
-            line-height: 1.6;
-            margin-bottom: 10px;
-        }
-
-        .error-message {
-            background: #f8d7da;
-            color: #721c24;
+        .trust-badge {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 20px;
             padding: 15px;
+            background: #e8f5e9;
             border-radius: 8px;
-            margin-bottom: 20px;
-            display: none;
-            border-left: 4px solid #dc3545;
+            font-size: 13px;
+            color: #2e7d32;
         }
 
-        .error-message.active {
-            display: block;
-        }
-
-        .help-text {
-            font-size: 12px;
-            color: #6c757d;
-            margin-top: 5px;
+        .trust-badge::before {
+            content: "✓";
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            background: #4caf50;
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 24px;
+            font-weight: bold;
         }
 
         @media (max-width: 600px) {
@@ -306,11 +213,15 @@
             }
 
             .header h1 {
-                font-size: 20px;
+                font-size: 24px;
+            }
+
+            .stat-number {
+                font-size: 40px;
             }
 
             .content {
-                padding: 20px 15px;
+                padding: 30px 15px;
             }
         }
     </style>
@@ -319,209 +230,100 @@
     <div class="container">
         <div class="header">
             <h1>キャンセル待ち登録</h1>
-            <p>ご希望日時に空きが出たらお電話でご連絡します</p>
+            <p>ご希望日に空きが出ましたら<br>お電話でご連絡いたします</p>
         </div>
 
         <div class="content">
-            <!-- エラーメッセージ -->
-            <div class="error-message" id="errorMessage"></div>
-
-            <!-- ローディング -->
-            <div class="loading" id="loading">
+            <div id="loading" class="loading">
                 <div class="spinner"></div>
-                <p>送信中...</p>
+                <p>データを読み込んでいます...</p>
             </div>
 
-            <!-- 成功メッセージ -->
-            <div class="success-message" id="successMessage">
-                <div class="success-icon">✅</div>
-                <h2>登録完了しました！</h2>
-                <p>ご希望日時に空きが出ましたら、<br>お電話でご連絡させていただきます。</p>
-                <p style="margin-top: 20px; font-size: 14px;">
-                    <strong>📞 FALAPの電話番号を登録してください</strong><br>
-                    <span style="color: #667eea; font-size: 18px; font-weight: 600;">092-776-1006</span>
+            <div id="stats-area" style="display: none;">
+                <div class="stats-container">
+                    <div class="stat-card">
+                        <div class="stat-number">
+                            <span id="current-waiting">0</span>
+                            <span class="unit">名</span>
+                        </div>
+                        <div class="stat-label">現在の待ち人数</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">
+                            <span id="last-month-success">0</span>
+                            <span class="unit">名</span>
+                        </div>
+                        <div class="stat-label"><span id="last-month-label">先月</span>の予約成功</div>
+                    </div>
+                </div>
+
+                <div class="info-box">
+                    <strong>📞 お電話でご連絡します</strong>
+                    登録順にお電話いたします。お電話がつながらない場合は次の方にご案内いたしますので、FALAPの番号（092-776-1006）を登録しておくことをおすすめします。
+                </div>
+
+                <button class="cta-button" onclick="goToForm()">
+                    キャンセル待ちに登録する
+                </button>
+
+                <div class="trust-badge">
+                    実際にキャンセル待ちから予約が取れています！
+                </div>
+
+                <p class="note">
+                    ※ ご希望日に必ず空きが出るとは限りません<br>
+                    ※ 希望日を過ぎた場合は自動的に期限切れとなります
                 </p>
             </div>
-
-            <!-- フォーム -->
-            <form id="cancelWaitingForm" action="https://script.google.com/macros/s/AKfycbzjv-k64PvRlr8VL-QLZ0Aqoo11uQQyw7UM0cF_pi7ReR1MC8wKH95XYEbqZaP8aSjz/exec" method="post">
-                <div class="notice">
-                    <div class="notice-title">⚠️ ご利用前にご確認ください</div>
-                    <ul>
-                        <li>お電話でのご連絡となります</li>
-                        <li>登録順にご連絡します</li>
-                        <li>お電話がつながらない場合、次の方にご案内します</li>
-                        <li>ご希望日に必ず空きが出るとは限りません</li>
-                    </ul>
-                </div>
-
-                <div class="form-group">
-                    <label for="name">お名前 <span class="required">必須</span></label>
-                    <input type="text" id="name" name="name" placeholder="山田太郎" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="phone">電話番号 <span class="required">必須</span></label>
-                    <input type="tel" id="phone" name="phone" placeholder="092-776-1006" required>
-                    <div class="help-text">空きが出た際にお電話でご連絡します</div>
-                </div>
-
-                <div class="form-group">
-                    <label for="date1">ご希望日（第1希望） <span class="required">必須</span></label>
-                    <input type="date" id="date1" name="date1" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="date2">ご希望日（第2希望） <span class="optional">任意</span></label>
-                    <input type="date" id="date2" name="date2">
-                </div>
-
-                <div class="form-group">
-                    <label for="date3">ご希望日（第3希望） <span class="optional">任意</span></label>
-                    <input type="date" id="date3" name="date3">
-                </div>
-
-                <div class="form-group">
-                    <label>ご希望の時間帯 <span class="required">必須</span></label>
-                    <div class="checkbox-group">
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="time1" name="time" value="午前（9:00-12:00）">
-                            <label for="time1">午前（9:00-12:00）</label>
-                        </div>
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="time2" name="time" value="午後（12:00-16:00）">
-                            <label for="time2">午後（12:00-16:00）</label>
-                        </div>
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="time3" name="time" value="夕方（16:00-19:00）">
-                            <label for="time3">夕方（16:00-19:00）</label>
-                        </div>
-                        <div class="checkbox-item">
-                            <input type="checkbox" id="time4" name="time" value="時間問わず">
-                            <label for="time4">時間問わず</label>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label>ご希望のメニュー <span class="required">必須</span></label>
-                    <div class="radio-group">
-                        <div class="radio-item">
-                            <input type="radio" id="menu1" name="menu" value="カット" required>
-                            <label for="menu1">カット</label>
-                        </div>
-                        <div class="radio-item">
-                            <input type="radio" id="menu2" name="menu" value="カット + カラー">
-                            <label for="menu2">カット + カラー</label>
-                        </div>
-                        <div class="radio-item">
-                            <input type="radio" id="menu3" name="menu" value="カット + パーマ">
-                            <label for="menu3">カット + パーマ</label>
-                        </div>
-                        <div class="radio-item">
-                            <input type="radio" id="menu4" name="menu" value="その他">
-                            <label for="menu4">その他</label>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="notes">その他ご要望 <span class="optional">任意</span></label>
-                    <textarea id="notes" name="notes" placeholder="何かご要望があればお聞かせください"></textarea>
-                </div>
-
-                <button type="submit" class="submit-btn">登録する</button>
-            </form>
         </div>
     </div>
 
     <script>
-        // フォームの送信処理
-        document.getElementById('cancelWaitingForm').addEventListener('submit', function(e) {
-            e.preventDefault();
+        // ⚠️ ここにGASのウェブアプリURLを設定してください
+        const GAS_URL = 'https://script.google.com/macros/s/AKfycbzjv-k64PvRlr8VL-QLZ0Aqoo11uQQyw7UM0cF_pi7ReR1MC8wKH95XYEbqZaP8aSjz/exec';
+        
+        // 登録フォームのURL（GitHub PagesまたはローカルのURL）
+        const FORM_URL = 'キャンセル待ち登録フォーム.html'; // 同じディレクトリにある場合
 
-            // 時間帯のチェック（最低1つ選択）
-            const timeChecked = document.querySelectorAll('input[name="time"]:checked');
-            if (timeChecked.length === 0) {
-                showError('希望時間帯を1つ以上選択してください');
-                return;
-            }
-
-            // フォームデータの取得
-            const formData = new FormData(this);
-            
-            // 時間帯の値を配列で取得
-            const times = Array.from(timeChecked).map(cb => cb.value).join(', ');
-            
-            // データオブジェクトの作成
-            const data = {
-                name: formData.get('name'),
-                phone: formData.get('phone'),
-                date1: formData.get('date1'),
-                date2: formData.get('date2') || '',
-                date3: formData.get('date3') || '',
-                time: times,
-                menu: formData.get('menu'),
-                notes: formData.get('notes') || ''
-            };
-
-            // ローディング表示
-            showLoading();
-
-            // URLSearchParams で form-urlencoded として送信（CORS preflight 回避）
-            const params = new URLSearchParams();
-            Object.entries(data).forEach(([k, v]) => params.append(k, v));
-
-            fetch(this.action, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
-                },
-                body: params.toString()
-            })
-            .then(r => r.text())
-            .then(txt => {
-                console.log('GAS response:', txt);
-                hideLoading();
-                showSuccess();
-            })
-            .catch(err => {
-                hideLoading();
-                showError('送信に失敗しました。もう一度お試しください。');
-                console.error('Error:', err);
-            });
+        // ページ読み込み時に統計データを取得
+        window.addEventListener('load', function() {
+            fetchStatistics();
         });
 
-        function showLoading() {
-            document.getElementById('loading').classList.add('active');
-            document.getElementById('cancelWaitingForm').style.display = 'none';
-            document.getElementById('errorMessage').classList.remove('active');
+        function fetchStatistics() {
+            fetch(GAS_URL + '?stats=true')
+                .then(response => response.json())
+                .then(data => {
+                    console.log('統計データ:', data);
+                    
+                    // データを表示
+                    document.getElementById('current-waiting').textContent = data.currentWaiting || 0;
+                    document.getElementById('last-month-success').textContent = data.lastMonthSuccess || 0;
+                    
+                    // 先月の表示を更新
+                    if (data.lastMonth) {
+                        document.getElementById('last-month-label').textContent = data.lastMonth + '月';
+                    }
+                    
+                    // ローディングを非表示、統計を表示
+                    document.getElementById('loading').style.display = 'none';
+                    document.getElementById('stats-area').style.display = 'block';
+                })
+                .catch(error => {
+                    console.error('エラー:', error);
+                    
+                    // エラー時はデフォルト値を表示
+                    document.getElementById('current-waiting').textContent = '3';
+                    document.getElementById('last-month-success').textContent = '5';
+                    document.getElementById('loading').style.display = 'none';
+                    document.getElementById('stats-area').style.display = 'block';
+                });
         }
 
-        function hideLoading() {
-            document.getElementById('loading').classList.remove('active');
+        function goToForm() {
+            // 登録フォームに遷移
+            window.location.href = FORM_URL;
         }
-
-        function showSuccess() {
-            document.getElementById('successMessage').classList.add('active');
-        }
-
-        function showError(message) {
-            const errorDiv = document.getElementById('errorMessage');
-            errorDiv.textContent = message;
-            errorDiv.classList.add('active');
-            
-            // 3秒後に自動で消す
-            setTimeout(() => {
-                errorDiv.classList.remove('active');
-            }, 5000);
-        }
-
-        // 今日の日付を最小日付として設定
-        const today = new Date().toISOString().split('T')[0];
-        document.getElementById('date1').setAttribute('min', today);
-        document.getElementById('date2').setAttribute('min', today);
-        document.getElementById('date3').setAttribute('min', today);
     </script>
 </body>
 </html>
